@@ -1,0 +1,55 @@
+### Ajouter un nouveau PC
+POST http://127.0.0.1:8002/pcs/
+Content-Type: application/json
+
+{
+  "pc_id": "pc-1",
+  "cpu_usage": 20.5,
+  "ram_usage": 50.0,
+  "status": true
+}
+
+### Ajouter un PC existant (attendu : erreur)
+POST http://127.0.0.1:8002/pcs/
+Content-Type: application/json
+
+{
+  "pc_id": "pc-1",
+  "cpu_usage": 30.0,
+  "ram_usage": 60.0,
+  "status": true
+}
+
+### Mettre à jour un PC
+PUT http://127.0.0.1:8002/pcs/pc-1
+Content-Type: application/json
+
+{
+  "cpu_usage": 25.0,
+  "ram_usage": 55.0,
+  "status": false
+}
+
+### Mettre à jour un PC inexistant (attendu : erreur)
+PUT http://127.0.0.1:8002/pcs/pc-unknown
+Content-Type: application/json
+
+{
+  "cpu_usage": 10.0,
+  "ram_usage": 20.0,
+  "status": true
+}
+
+### Supprimer un PC
+DELETE http://127.0.0.1:8002/pcs/pc-1
+
+### Supprimer un PC inexistant (attendu : erreur)
+DELETE http://127.0.0.1:8002/pcs/pc-unknown
+
+### Allouer une VM à un PC actif
+POST http://127.0.0.1:8002/allocate_vm/
+Content-Type: application/json
+
+{
+  "vm_id": "vm-1"
+}

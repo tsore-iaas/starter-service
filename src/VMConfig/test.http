@@ -1,0 +1,54 @@
+### Créer un nouveau template
+POST http://127.0.0.1:8001/templates/
+Content-Type: application/json
+
+{
+  "id": "template-1",
+  "name": "Small VM",
+  "cpu": 2,
+  "ram": 4,
+  "storage": 20
+}
+
+### Ajouter un template existant (attendu : erreur)
+POST http://127.0.0.1:8001/templates/
+Content-Type: application/json
+
+{
+  "id": "template-1",
+  "name": "Duplicate VM",
+  "cpu": 2,
+  "ram": 4,
+  "storage": 20
+}
+
+### Lister tous les templates
+GET http://127.0.0.1:8001/templates/
+
+### Mettre à jour un template
+PUT http://127.0.0.1:8001/templates/template-1
+Content-Type: application/json
+
+{
+  "name": "Updated VM",
+  "cpu": 4,
+  "ram": 8,
+  "storage": 40
+}
+
+### Mettre à jour un template inexistant (attendu : erreur)
+PUT http://127.0.0.1:8001/templates/template-unknown
+Content-Type: application/json
+
+{
+  "name": "Non-Existent VM",
+  "cpu": 1,
+  "ram": 1,
+  "storage": 1
+}
+
+### Supprimer un template
+DELETE http://127.0.0.1:8001/templates/template-1
+
+### Supprimer un template inexistant (attendu : erreur)
+DELETE http://127.0.0.1:8001/templates/template-unknown

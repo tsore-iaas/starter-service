@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package vm;
+
+service VMConfig {
+    rpc SaveTemplate (TemplateRequest) returns (Response);
+    rpc GetTemplates (Empty) returns (TemplateList);
+}
+
+service LoadBalancer {
+    rpc AllocateVM (VMRequest) returns (Response);
+    rpc CheckStatus (Empty) returns (ResourceStatus);
+}
+
+message TemplateRequest {
+    string name = 1;
+    string config = 2;
+}
+
+message VMRequest {
+    string template_name = 1;
+    string machine_id = 2;
+}
+
+message Response {
+    string message = 1;
+    bool success = 2;
+}
+
+message TemplateList {
+    repeated string templates = 1;
+}
+
+message ResourceStatus {
+    map<string, string> machine_status = 1;
+}
+
+message Empty {}
